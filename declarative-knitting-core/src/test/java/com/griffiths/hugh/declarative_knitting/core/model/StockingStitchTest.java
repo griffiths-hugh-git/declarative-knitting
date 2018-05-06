@@ -1,21 +1,22 @@
 package com.griffiths.hugh.declarative_knitting.core.model;
 
 import com.griffiths.hugh.declarative_knitting.core.model.patterns.PatternSegment;
-import com.griffiths.hugh.declarative_knitting.core.rules.BindOff;
-import com.griffiths.hugh.declarative_knitting.core.rules.colour.BlockColour;
-import com.griffiths.hugh.declarative_knitting.core.rules.StockingStitch;
 import org.junit.Test;
+
+import static com.griffiths.hugh.declarative_knitting.core.rules.RuleFactory.bindOff;
+import static com.griffiths.hugh.declarative_knitting.core.rules.RuleFactory.blockColour;
+import static com.griffiths.hugh.declarative_knitting.core.rules.RuleFactory.stockingStitch;
 
 public class StockingStitchTest {
 
 	@Test
-	public void testStockingStitchPattern(){
+	public void testStockingStitchPattern() {
 		PatternSegment patternSegment = PatternSegment.castOn(20);
 
-		patternSegment.addRule(new StockingStitch(0))
-				.addColourRule(new BlockColour(0))
+		patternSegment.addRule(stockingStitch(0))
+				.addColourRule(blockColour(0))
 				.knitRows(10);
-		patternSegment.clearRules().addRule(new BindOff())
+		patternSegment.clearRules().addRule(bindOff())
 				.knitRow();
 
 		patternSegment.getRows().forEach(

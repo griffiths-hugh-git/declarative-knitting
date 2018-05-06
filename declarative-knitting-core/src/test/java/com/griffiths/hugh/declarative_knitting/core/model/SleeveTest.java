@@ -1,11 +1,12 @@
 package com.griffiths.hugh.declarative_knitting.core.model;
 
 import com.griffiths.hugh.declarative_knitting.core.model.patterns.PatternSegment;
-import com.griffiths.hugh.declarative_knitting.core.rules.BindOff;
 import com.griffiths.hugh.declarative_knitting.core.rules.RibStitch;
 import com.griffiths.hugh.declarative_knitting.core.rules.StockingStitch;
-import com.griffiths.hugh.declarative_knitting.core.rules.modifiers.IncreaseBothEnds;
 import org.junit.Test;
+
+import static com.griffiths.hugh.declarative_knitting.core.rules.RuleFactory.bindOff;
+import static com.griffiths.hugh.declarative_knitting.core.rules.RuleFactory.increaseBothEnds;
 
 public class SleeveTest {
 
@@ -16,9 +17,9 @@ public class SleeveTest {
 		patternSegment.addRule(new RibStitch(0))
 				.knitRows(6);
 		patternSegment.clearRules().addRule(new StockingStitch(0))
-				.addRule(new IncreaseBothEnds(0))
+				.addRule(increaseBothEnds(0))
 				.knitRows(10);
-		patternSegment.clearRules().addRule(new BindOff())
+		patternSegment.clearRules().addRule(bindOff())
 				.knitRow();
 
 		patternSegment.getRows().forEach(

@@ -10,6 +10,9 @@ import java.io.FileOutputStream;
 import java.util.List;
 import org.junit.Test;
 
+import static com.griffiths.hugh.declarative_knitting.core.rules.RuleFactory.bindOff;
+import static com.griffiths.hugh.declarative_knitting.core.rules.RuleFactory.stockingStitch;
+
 public class PixelBasedCellularAutomatonTest {
 
 	@Test
@@ -18,9 +21,9 @@ public class PixelBasedCellularAutomatonTest {
 		Rule imageRule = PixelBasedLaceImage.getInstance(result);
 
 		PatternSegment patternSegment = PatternSegment.castOn(100);
-		patternSegment.addRule(new StockingStitch(0)).addRule(imageRule)
+		patternSegment.addRule(stockingStitch(0)).addRule(imageRule)
 				.knitRows(100);
-		patternSegment.clearRules().addRule(new BindOff())
+		patternSegment.clearRules().addRule(bindOff())
 				.knitRow();
 
 		try (XlsxRenderer renderer = new XlsxRenderer(new FileOutputStream("target/ca.xlsx"))){
