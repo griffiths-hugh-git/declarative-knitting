@@ -3,6 +3,7 @@ package com.griffiths.hugh.declarative_knitting.images;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import nu.pattern.OpenCV;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -14,13 +15,12 @@ import org.opencv.imgproc.Imgproc;
 
 public class EdgeDetector {
 	static {
-		// TODO: Parametrize
-		System.load(new File("src/main/resources/opencv_java341.dll").getAbsolutePath());
+		OpenCV.loadLocally();
 	}
 
 	public static Mat segmentImage(final String filename, final int width, final double pixelAspectRatio) {
 		Mat img = Imgcodecs.imread(filename);
-		return segmentImage(filename, width, pixelAspectRatio);
+		return segmentImage(img, width, pixelAspectRatio);
 	}
 
 	public static Mat segmentImage(Mat img, int width, double pixelAspectRatio) {

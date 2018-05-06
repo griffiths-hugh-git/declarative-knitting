@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
+import nu.pattern.OpenCV;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,8 +32,7 @@ public class ImageEdgeLaceController {
 	private static final String IMAGE_FOLDER = "images/";
 
 	static {
-		// TODO: Parametrize
-		System.load(new File("src/main/resources/opencv_java341.dll").getAbsolutePath());
+		OpenCV.loadLocally();
 	}
 
 	private Logger log = Logger.getLogger(this.getClass().getSimpleName());
