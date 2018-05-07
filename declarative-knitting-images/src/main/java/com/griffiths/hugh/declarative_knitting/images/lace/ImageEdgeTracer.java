@@ -1,10 +1,8 @@
-package com.griffiths.hugh.declarative_knitting.images;
+package com.griffiths.hugh.declarative_knitting.images.lace;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.util.Pair;
 import org.opencv.core.Mat;
-import org.opencv.imgcodecs.Imgcodecs;
 
 public class ImageEdgeTracer {
 

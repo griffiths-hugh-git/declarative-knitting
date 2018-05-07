@@ -1,4 +1,4 @@
-package com.griffiths.hugh.declarative_knitting.images;
+package com.griffiths.hugh.declarative_knitting.images.lace;
 
 public class ArrayUtils {
 	public static boolean getSafeValue(boolean[] row, int position) {

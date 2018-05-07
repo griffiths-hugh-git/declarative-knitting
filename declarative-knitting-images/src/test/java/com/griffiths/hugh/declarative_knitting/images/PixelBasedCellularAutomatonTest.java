@@ -3,9 +3,8 @@ package com.griffiths.hugh.declarative_knitting.images;
 import com.griffiths.hugh.declarative_knitting.core.model.patterns.PatternSegment;
 import com.griffiths.hugh.declarative_knitting.core.model.rows.Rule;
 import com.griffiths.hugh.declarative_knitting.core.rendering.XlsxRenderer;
-import com.griffiths.hugh.declarative_knitting.core.rules.BindOff;
-import com.griffiths.hugh.declarative_knitting.core.rules.StockingStitch;
-import com.griffiths.hugh.declarative_knitting.images.cellular_automata.CellularAutomataGenerator;
+import com.griffiths.hugh.declarative_knitting.images.lace.cellular_automata.CellularAutomataGenerator;
+import com.griffiths.hugh.declarative_knitting.images.lace.PixelBasedLaceImageRule;
 import java.io.FileOutputStream;
 import java.util.List;
 import org.junit.Test;
@@ -18,7 +17,7 @@ public class PixelBasedCellularAutomatonTest {
 	@Test
 	public void knitCellularAutomatonTest() throws Exception {
 		List<boolean[]> result = generateCellularAutomatonPattern();
-		Rule imageRule = PixelBasedLaceImage.getInstance(result);
+		Rule imageRule = PixelBasedLaceImageRule.getInstance(result);
 
 		PatternSegment patternSegment = PatternSegment.castOn(100);
 		patternSegment.addRule(stockingStitch(0)).addRule(imageRule)

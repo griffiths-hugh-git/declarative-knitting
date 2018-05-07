@@ -1,11 +1,10 @@
-package com.griffiths.hugh.declarative_knitting.images.cellular_automata;
+package com.griffiths.hugh.declarative_knitting.images.lace.cellular_automata;
 
-import com.griffiths.hugh.declarative_knitting.images.ArrayUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.griffiths.hugh.declarative_knitting.images.ArrayUtils.getSafeValue;
-import static com.griffiths.hugh.declarative_knitting.images.ArrayUtils.printBooleanArray;
+import static com.griffiths.hugh.declarative_knitting.images.lace.ArrayUtils.getSafeValue;
+import static com.griffiths.hugh.declarative_knitting.images.lace.ArrayUtils.printBooleanArray;
 
 public class CellularAutomataGenerator {
 

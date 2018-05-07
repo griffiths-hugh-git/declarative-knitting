@@ -1,4 +1,4 @@
-package com.griffiths.hugh.declarative_knitting.images;
+package com.griffiths.hugh.declarative_knitting.images.lace;
 
 import com.griffiths.hugh.declarative_knitting.core.model.rows.Row;
 import com.griffiths.hugh.declarative_knitting.core.model.rows.Rule;
@@ -7,15 +7,15 @@ import com.griffiths.hugh.declarative_knitting.core.rules.decorators.RightSideOn
 import java.util.Iterator;
 import java.util.List;
 
-public class PixelBasedLaceImage implements Rule {
+public class PixelBasedLaceImageRule implements Rule {
 	private final Iterator<boolean[]> image;
 
-	private PixelBasedLaceImage(List<boolean[]> image) {
+	private PixelBasedLaceImageRule(List<boolean[]> image) {
 		this.image = image.iterator();
 	}
 
 	public static Rule getInstance(List<boolean[]> image){
-		return new RightSideOnly(new PixelBasedLaceImage(image));
+		return new RightSideOnly(new PixelBasedLaceImageRule(image));
 	}
 
 	@Override

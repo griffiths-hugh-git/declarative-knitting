@@ -5,8 +5,8 @@ import com.griffiths.hugh.declarative_knitting.core.model.rows.Rule;
 import com.griffiths.hugh.declarative_knitting.core.rendering.XlsxRenderer;
 import com.griffiths.hugh.declarative_knitting.core.rules.BindOff;
 import com.griffiths.hugh.declarative_knitting.core.rules.StockingStitch;
-import com.griffiths.hugh.declarative_knitting.images.PixelBasedLaceImage;
-import com.griffiths.hugh.declarative_knitting.images.cellular_automata.CellularAutomataGenerator;
+import com.griffiths.hugh.declarative_knitting.images.lace.PixelBasedLaceImageRule;
+import com.griffiths.hugh.declarative_knitting.images.lace.cellular_automata.CellularAutomataGenerator;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
@@ -57,7 +57,7 @@ public class CellularAutomataController {
 
 	private void generatePattern(OutputStream outputStream, boolean[] rule, int rows) throws IOException{
 		List<boolean[]> result = generateCellularAutomatonPattern(rule, rows);
-		Rule imageRule = PixelBasedLaceImage.getInstance(result);
+		Rule imageRule = PixelBasedLaceImageRule.getInstance(result);
 
 		PatternSegment patternSegment = PatternSegment.castOn(100);
 		patternSegment.addRule(new StockingStitch(0)).addRule(imageRule)

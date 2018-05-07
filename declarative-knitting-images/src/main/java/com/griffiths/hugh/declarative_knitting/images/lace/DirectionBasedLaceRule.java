@@ -1,14 +1,14 @@
-package com.griffiths.hugh.declarative_knitting.images;
+package com.griffiths.hugh.declarative_knitting.images.lace;
 
 import com.griffiths.hugh.declarative_knitting.core.model.rows.Row;
 import com.griffiths.hugh.declarative_knitting.core.model.rows.Rule;
 import java.util.Iterator;
 import java.util.List;
 
-public class DirectionBasedLaceRow implements Rule {
+public class DirectionBasedLaceRule implements Rule {
 	private final Iterator<int[]> directionsIterator;
 
-	public DirectionBasedLaceRow(List<int[]> directions) {
+	public DirectionBasedLaceRule(List<int[]> directions) {
 		this.directionsIterator = directions.iterator();
 	}
 

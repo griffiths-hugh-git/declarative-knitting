@@ -1,4 +1,4 @@
-package com.griffiths.hugh.declarative_knitting.images;
+package com.griffiths.hugh.declarative_knitting.images.lace;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -16,6 +16,7 @@
 
 package com.griffiths.hugh.ui;
 
+import nu.pattern.OpenCV;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -27,6 +28,9 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 @ComponentScan
 public class SampleWebStaticApplication extends SpringBootServletInitializer {
+	static {
+		OpenCV.loadLocally();
+	}
 
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(SampleWebStaticApplication.class, args);

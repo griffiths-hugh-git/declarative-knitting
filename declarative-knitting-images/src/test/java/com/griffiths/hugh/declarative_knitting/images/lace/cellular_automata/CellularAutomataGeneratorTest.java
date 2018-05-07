@@ -1,10 +1,8 @@
-package com.griffiths.hugh.declarative_knitting.images.cellular_automata;
+package com.griffiths.hugh.declarative_knitting.images.lace.cellular_automata;
 
-import com.griffiths.hugh.declarative_knitting.images.ArrayUtils;
+import com.griffiths.hugh.declarative_knitting.images.lace.ArrayUtils;
 import java.util.List;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class CellularAutomataGeneratorTest {
 	@Test

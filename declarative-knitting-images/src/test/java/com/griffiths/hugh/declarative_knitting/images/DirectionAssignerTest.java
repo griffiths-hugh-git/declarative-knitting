@@ -1,10 +1,11 @@
 package com.griffiths.hugh.declarative_knitting.images;
 
-import com.griffiths.hugh.declarative_knitting.images.cellular_automata.CellularAutomataGenerator;
+import com.griffiths.hugh.declarative_knitting.images.lace.cellular_automata.CellularAutomataGenerator;
+import com.griffiths.hugh.declarative_knitting.images.lace.DirectionAssigner;
 import java.util.List;
 import org.junit.Test;
 
-import static com.griffiths.hugh.declarative_knitting.images.DirectionAssigner.printDirectionsArray;
+import static com.griffiths.hugh.declarative_knitting.images.lace.DirectionAssigner.printDirectionsArray;
 
 public class DirectionAssignerTest {
 	@Test

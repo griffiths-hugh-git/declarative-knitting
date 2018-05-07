@@ -4,6 +4,7 @@ import com.griffiths.hugh.declarative_knitting.core.model.patterns.Pattern;
 import com.griffiths.hugh.declarative_knitting.core.model.patterns.PatternSegment;
 import com.griffiths.hugh.declarative_knitting.core.model.stitches.Stitch;
 import com.griffiths.hugh.declarative_knitting.core.rendering.util.RowCompressUtil;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.List;
@@ -22,7 +23,7 @@ public class LatexRenderer implements Renderer, AutoCloseable {
 	}
 
 	@Override
-	public void close() throws Exception {
+	public void close() throws IOException {
 		printWriter.close();
 	}
 

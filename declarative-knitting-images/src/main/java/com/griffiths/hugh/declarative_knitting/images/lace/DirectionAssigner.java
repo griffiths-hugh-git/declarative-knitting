@@ -1,4 +1,4 @@
-package com.griffiths.hugh.declarative_knitting.images;
+package com.griffiths.hugh.declarative_knitting.images.lace;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
-import static com.griffiths.hugh.declarative_knitting.images.ArrayUtils.getSafeValue;
+import static com.griffiths.hugh.declarative_knitting.images.lace.ArrayUtils.getSafeValue;
 
 public class DirectionAssigner {
 	private static Map<Integer, Character> characterMap = getCharacterMap();
