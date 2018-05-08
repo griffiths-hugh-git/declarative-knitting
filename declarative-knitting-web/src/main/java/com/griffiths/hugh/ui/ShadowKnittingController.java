@@ -20,11 +20,11 @@ public class ShadowKnittingController {
 	private Logger log = Logger.getLogger(this.getClass().getSimpleName());
 
 	/*
-	 * Example: 
+	 * Example:
 	 * http://localhost:8080/shadow?width=100&imageUrl=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F5c%2F54%2F09%2F5c54099509dd08dcb7db52b94a4ff467.png
 	 */
 
-	@RequestMapping(value = "shadow", method = RequestMethod.GET)
+	@RequestMapping(value = "rest/shadow", method = RequestMethod.GET)
 	public void generateCellularAutomaton(final HttpServletResponse response, @RequestParam("imageUrl") final String imageUrl,
 										  @RequestParam("width") final int width) throws IOException {
 		String requestId = UUID.randomUUID().toString();

@@ -21,8 +21,8 @@ public class ShadowKnittingTest {
 		String filename = "src/test/resources/dachshund.jpg";
 
 		// Create pattern and output as spreadsheet
-		try (FileOutputStream outputStream = new FileOutputStream(getOutputFilename(filename))){
-			XlsxRenderer xlsxRenderer = new XlsxRenderer(outputStream);
+		try (FileOutputStream outputStream = new FileOutputStream(getOutputFilename(filename));
+			 XlsxRenderer xlsxRenderer = new XlsxRenderer(outputStream)){
 			ShadowKnittingHelper.createShadowKnittingPattern(filename, xlsxRenderer);
 		}
 	}

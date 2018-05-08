@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shadow Knitting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css"
+          href="/webjars/bootstrap/3.0.3/css/bootstrap.min.css"/>
+</head>
+<body>
+<script type="text/javascript"
+        src="/webjars/jquery/2.0.3/jquery.min.js"></script>
+<div id="navbar" class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                data-target=".navbar-collapse">
+            <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+                class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand"
+           href="/">Declarative Knitting
+        </a>
+    </div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li><a href="/"> Blog </a></li>
+        </ul>
+        <ul class="nav navbar-nav">
+            <li><a href="https://github.com/spring-projects/spring-boot"> Spring Boot </a></li>
+        </ul>
+        <ul class="nav navbar-nav">
+            <li><a href="/"> OpenCV </a></li>
+        </ul>
+    </div>
+</div>
+<div class="jumbotron">
+    <h1>Shadow Knitting</h1>
+    <p>Produces shadow/illusion knitting patterns from images.</p>
+</div>
+<div>
+    <p><a href="https://en.wikipedia.org/wiki/Illusion_knitting">Shadow (or "illusion") knitting</a> is a technique
+        which uses thin stripes and raised ridges to create knitting
+        patterns which are hidden when viewed head on, but appear when seen from an angle. <a
+                href="http://www.illusionknitting.woollythoughts.com/information.html">Pat Ashforth and Steve
+            Plummer of Woolly Thoughts</a> are the masters of this technique, and have created some <a>beautiful
+            examples</a>.
+    </p>
+    <p>This tool takes in picture and uses k-means clustering to divide it into two main colours, then generates a
+        shadow knitting chart based on this image. This will then be downloaded in your browser as a spreadsheet. This
+        will work best with images with obvious foreground and background colours. In the spreadsheet, purl stitches are
+        shown slightly darker than knit stitches - this is to allow the final pattern to be visible in the
+        sheet. Generating may take a few seconds, please be patient - this is because the generated spreadsheet can be
+        large.</p>
+
+    <form action="/rest/shadow" method="get" action="_blank">
+        <div class="form-group">
+            <label for="imageUrlBox">Image URL</label>
+            <input type="text" name="imageUrl" class="form-control" id="imageUrlBox" aria-describedby="imageUrlHelp"
+                   placeholder="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
+            <small id="imageUrlHelp" class="form-text text-muted">Enter the URL of an image to knit. This should be a
+                direct link, and must end with a file extension (e.g. .jpg)
+            </small>
+        </div>
+        <div class="form-group">
+            <label for="widthBox">Width (stitches)</label>
+            <input type="text" name="width" class="form-control" id="widthBox" aria-describedby="widthHelp"
+                   placeholder="50">
+            <small id="widthHelp" class="form-text text-muted">Enter the width, in stitches, to make the generated
+                pattern. The generator will preserve the original image's aspect ratio.
+            </small>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <!--<form action="/rest/shadow" method="get" action="_blank">-->
+    <!--Width:<br/>-->
+    <!--<input type="text" name="width"><br/>-->
+    <!--Image URL:<br/>-->
+    <!--<input type="text" name="imageUrl"><br/>-->
+    <!--<input type="submit" value="Submit"><br/>-->
+    <!--</form>-->
+</div>
+<script type="text/javascript"
+        src="/webjars/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+</body>
+</html>

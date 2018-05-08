@@ -9,9 +9,11 @@ import java.io.IOException;
 
 import static com.griffiths.hugh.declarative_knitting.core.rules.RuleFactory.bindOff;
 import static com.griffiths.hugh.declarative_knitting.core.rules.RuleFactory.stockingStitch;
-import static com.griffiths.hugh.declarative_knitting.core.rules.RuleFactory.stripedColour;
+import static com.griffiths.hugh.declarative_knitting.images.shadow.ShadowKnittingStripedColour.shadowKnittingStripes;
 
 public class ShadowKnittingHelper {
+
+	public static final double FADE_PROPORTION = 0.7;
 
 	public static FlattenedImage createShadowKnittingPattern(String filename, XlsxRenderer renderer) throws IOException {
 		// Flatten
@@ -26,11 +28,13 @@ public class ShadowKnittingHelper {
 		// Set colours
 		pattern.addColour(1, getColour(flattenedImage.getForeground()));
 		pattern.addColour(2, getColour(flattenedImage.getBackground()));
+		pattern.addColour(3, getFadedColour(flattenedImage.getForeground()));
+		pattern.addColour(4, getFadedColour(flattenedImage.getBackground()));
 
 		// Knit
 		// NB - the primary colour is the second stripe, which will be raised on active pixels
 		patternSegment.addRule(stockingStitch(0)).addRule(imageRule)
-				.addColourRule(stripedColour(2, 2, 2, 1))
+				.addColourRule(shadowKnittingStripes(1, 2, 3, 4))
 				.knitRows(numRows);
 		patternSegment.clearRules().addRule(bindOff()).knitRow();
 
@@ -45,4 +49,7 @@ public class ShadowKnittingHelper {
 		return new Color((int) bgr[2], (int) bgr[1], (int) bgr[0]);
 	}
 
+	private static Color getFadedColour(double[] bgr) {
+		return new Color((int) (bgr[2]* FADE_PROPORTION), (int) (bgr[1]* FADE_PROPORTION), (int) (bgr[0]* FADE_PROPORTION));
+	}
 }

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+//@RestController
 public class ImageEdgeLaceController {
 	private static final double STITCH_ASPECT_RATIO = 1.5;
 
