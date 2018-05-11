@@ -10,7 +10,7 @@
     </parent>
     <artifactId>declarative-knitting-web</artifactId>
     <groupId>com.griffiths.hugh</groupId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>Spring Boot Web Static Sample</name>
     <description>Spring Boot Web Static Sample</description>
