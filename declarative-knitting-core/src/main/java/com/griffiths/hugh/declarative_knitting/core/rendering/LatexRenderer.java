@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 /**
@@ -17,9 +18,20 @@ import java.util.stream.Collectors;
  * This is intended to produce snippets to scaffold patterns as much as possible, it won't produce entire documents.
  */
 public class LatexRenderer implements Renderer, AutoCloseable {
+	private static final String LATEX_DOCUMENT_PROPERTIES = "/latex_document.properties";
 	private final PrintWriter printWriter;
+
+	private Properties config;
+
 	public LatexRenderer(OutputStream outputStream) {
 		this.printWriter = new PrintWriter(outputStream);
+
+		config = new Properties();
+		try {
+			config.load(this.getClass().getResourceAsStream(LATEX_DOCUMENT_PROPERTIES));
+		} catch (IOException e) {
+			throw new IllegalStateException("Configuration not found : "+LATEX_DOCUMENT_PROPERTIES);
+		}
 	}
 
 	@Override
@@ -29,16 +41,25 @@ public class LatexRenderer implements Renderer, AutoCloseable {
 
 	@Override
 	public void render(Pattern pattern) {
+		// Front matter
+		printWriter.println(config.getProperty("title_page"));
+
+		printWriter.println(config.getProperty("colour_definitions"));
+
+		printWriter.println(config.getProperty("introduction"));
 
 		pattern.getSegments().entrySet().forEach(entry -> {
 			// Print the title
-			printWriter.println(String.format("\\section*{%s}\n\n" +
-					"\\intro{\nDescription text, description text.\n}{lion.png}\n", entry.getKey()));
+			printWriter.println(String.format(config.getProperty("section_format"), entry.getKey()));
 
 			// Render the segment
 			render(entry.getValue());
 			printWriter.println();
 		});
+
+		// End matter
+		printWriter.println(config.getProperty("biography"));
+		printWriter.println(config.getProperty("document_end"));
 	}
 
 	@Override
@@ -46,7 +67,7 @@ public class LatexRenderer implements Renderer, AutoCloseable {
 		printWriter.println("\\begin{pattern}{colour1}{colour2}");
 		patternSegment.getRows().stream()
 				.map(row ->
-					String.format("\\phantom{}%s & (%d)\\\\", renderRow(row.getStitches()), row.getNumChildLoops()))
+						String.format("\\phantom{}%s & (%d)\\\\", renderRow(row.getStitches()), row.getNumChildLoops()))
 				.forEach(printWriter::println);
 		printWriter.println("\\end{pattern}");
 	}
