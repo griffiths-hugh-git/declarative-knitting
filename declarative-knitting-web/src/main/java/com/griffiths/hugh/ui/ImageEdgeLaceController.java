@@ -9,6 +9,7 @@ import com.griffiths.hugh.declarative_knitting.images.lace.EdgeDetector;
 import com.griffiths.hugh.declarative_knitting.images.lace.ImageEdgeTracer;
 import com.griffiths.hugh.declarative_knitting.images.lace.PixelBasedLaceImageRule;
 import com.griffiths.hugh.ui.util.ImageUtil;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
@@ -20,7 +21,6 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 //@RestController
 public class ImageEdgeLaceController {
@@ -60,7 +60,8 @@ public class ImageEdgeLaceController {
 	}
 
 	private List<boolean[]> detectEdges(String requestId, String url, int width) throws IOException {
-		String tempFilename = ImageUtil.downloadImageFile(requestId, url);
+		File imageFile = ImageUtil.downloadImageFile(requestId, url);
+		String tempFilename = imageFile.getAbsolutePath();
 		Mat img = Imgcodecs.imread(tempFilename);
 		Mat imgEdges = EdgeDetector.segmentImage(img, width, STITCH_ASPECT_RATIO);
 

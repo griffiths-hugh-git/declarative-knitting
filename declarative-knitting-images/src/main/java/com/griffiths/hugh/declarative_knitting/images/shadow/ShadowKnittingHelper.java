@@ -15,9 +15,9 @@ public class ShadowKnittingHelper {
 
 	public static final double FADE_PROPORTION = 0.7;
 
-	public static FlattenedImage createShadowKnittingPattern(String filename, XlsxRenderer renderer) throws IOException {
+	public static FlattenedImage createShadowKnittingPattern(String filename, XlsxRenderer renderer, int widthStitches) throws IOException {
 		// Flatten
-		FlattenedImage flattenedImage = new FlattenedImage(filename, 100, 0.67);
+		FlattenedImage flattenedImage = new FlattenedImage(filename, widthStitches/4, 0.67);
 
 		// Create pattern
 		Pattern pattern = new Pattern();

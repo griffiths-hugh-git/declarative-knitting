@@ -48,9 +48,10 @@
         shadow knitting chart based on this image. This will then be downloaded in your browser as a spreadsheet. This
         will work best with images with obvious foreground and background colours. In the spreadsheet, purl stitches are
         shown slightly darker than knit stitches - this is to allow the final pattern to be visible in the
-        sheet. Generating may take a few seconds, please be patient - this is because the generated spreadsheet can be
-        large.</p>
-
+        sheet.</p>
+    <p>Generating may take a few seconds, please be patient - this is because the generated spreadsheet can be
+        large. Also, please be patient with the error handling - some websites do not allow direct linking to images,
+        which can prevent processing.
     <form action="/rest/shadow" method="get" action="_blank">
         <div class="form-group">
             <label for="imageUrlBox">Image URL</label>
@@ -63,21 +64,13 @@
         <div class="form-group">
             <label for="widthBox">Width (stitches)</label>
             <input type="text" name="width" class="form-control" id="widthBox" aria-describedby="widthHelp"
-                   placeholder="50">
+                   placeholder="200">
             <small id="widthHelp" class="form-text text-muted">Enter the width, in stitches, to make the generated
-                pattern. The generator will preserve the original image's aspect ratio.
+                pattern. The generator will calculate the appropriate height. Maximum of 1000.
             </small>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
-    <!--<form action="/rest/shadow" method="get" action="_blank">-->
-    <!--Width:<br/>-->
-    <!--<input type="text" name="width"><br/>-->
-    <!--Image URL:<br/>-->
-    <!--<input type="text" name="imageUrl"><br/>-->
-    <!--<input type="submit" value="Submit"><br/>-->
-    <!--</form>-->
 </div>
 <script type="text/javascript"
         src="/webjars/bootstrap/3.0.3/js/bootstrap.min.js"></script>

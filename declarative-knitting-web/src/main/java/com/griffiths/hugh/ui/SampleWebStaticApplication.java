@@ -18,6 +18,7 @@ package com.griffiths.hugh.ui;
 
 import nu.pattern.OpenCV;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.autoconfigure.ErrorMvcAutoConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
@@ -25,7 +26,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableAutoConfiguration
+@EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class})
 @ComponentScan
 public class SampleWebStaticApplication extends SpringBootServletInitializer {
 	static {
