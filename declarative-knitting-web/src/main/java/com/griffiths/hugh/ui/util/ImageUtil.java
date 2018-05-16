@@ -9,6 +9,8 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.opencv.core.Mat;
+import org.opencv.imgcodecs.Imgcodecs;
 import org.springframework.http.HttpStatus;
 
 public class ImageUtil {
@@ -50,6 +52,12 @@ public class ImageUtil {
 				IOUtils.copy(new URL(url).openStream(), fos);
 			} catch (IOException e) {
 				throw new ImageNotFoundException("Failed to copy image", e);
+			}
+
+			// Check the image can be read
+			Mat imread = Imgcodecs.imread(tempFile.getAbsolutePath());
+			if (imread==null || imread.width()==0){
+				throw new ImageNotFoundException("Unable to read image");
 			}
 
 			return tempFile;

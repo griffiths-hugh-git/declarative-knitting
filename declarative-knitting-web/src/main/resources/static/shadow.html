@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Shadow Knitting</title>
+    <title>Declarative Knitting</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css"
           href="/webjars/bootstrap/3.0.3/css/bootstrap.min.css"/>
@@ -22,13 +22,13 @@
     </div>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-            <li><a href="/"> Blog </a></li>
+            <li><a href="https://geekdevving.blogspot.com"> Blog </a></li>
         </ul>
         <ul class="nav navbar-nav">
-            <li><a href="https://github.com/spring-projects/spring-boot"> Spring Boot </a></li>
+            <li><a href="https://github.com/griffiths-hugh-git/declarative-knitting"> Github </a></li>
         </ul>
         <ul class="nav navbar-nav">
-            <li><a href="/"> OpenCV </a></li>
+            <li><a href="https://www.ravelry.com/projects/Jhadur"> Ravelry </a></li>
         </ul>
     </div>
 </div>
@@ -50,8 +50,9 @@
         shown slightly darker than knit stitches - this is to allow the final pattern to be visible in the
         sheet.</p>
     <p>Generating may take a few seconds, please be patient - this is because the generated spreadsheet can be
-        large. Also, please be patient with the error handling - some websites do not allow direct linking to images,
-        which can prevent processing.
+        large. Also, please be patient with the error handling - there's quite a few things which can go wrong while
+        trying to get hold of the requested image. The system will make it's best attempt to get the image you request,
+        if it fails please try a different image.
     <form action="/rest/shadow" method="get" action="_blank">
         <div class="form-group">
             <label for="imageUrlBox">Image URL</label>
@@ -66,7 +67,7 @@
             <input type="text" name="width" class="form-control" id="widthBox" aria-describedby="widthHelp"
                    placeholder="200">
             <small id="widthHelp" class="form-text text-muted">Enter the width, in stitches, to make the generated
-                pattern. The generator will calculate the appropriate height. Maximum of 1000.
+                pattern. The generator will calculate the appropriate height. Maximum of 500.
             </small>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>

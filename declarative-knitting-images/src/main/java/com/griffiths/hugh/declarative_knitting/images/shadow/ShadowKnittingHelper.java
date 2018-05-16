@@ -17,7 +17,7 @@ public class ShadowKnittingHelper {
 
 	public static FlattenedImage createShadowKnittingPattern(String filename, XlsxRenderer renderer, int widthStitches) throws IOException {
 		// Flatten
-		FlattenedImage flattenedImage = new FlattenedImage(filename, widthStitches/4, 0.67);
+		FlattenedImage flattenedImage = new FlattenedImage(filename, widthStitches/2, 0.67);
 
 		// Create pattern
 		Pattern pattern = new Pattern();
