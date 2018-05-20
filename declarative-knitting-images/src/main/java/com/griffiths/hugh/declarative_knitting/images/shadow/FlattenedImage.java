@@ -127,7 +127,7 @@ public class FlattenedImage {
 				rows++;
 			}
 		}
-		System.out.println(counts);
+
 		return flattened;
 	}
 
