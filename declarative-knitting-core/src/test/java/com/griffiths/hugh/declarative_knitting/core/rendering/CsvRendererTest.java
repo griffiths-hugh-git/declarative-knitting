@@ -27,23 +27,24 @@ public class CsvRendererTest {
 	@Test
 	public void render() throws Exception {
 
-		PatternSegment patternSegment = PatternSegment.castOn(6);
+		final PatternSegment patternSegment = PatternSegment.castOn(6);
 
 		patternSegment.addRule(ribStitch(0)).knitRows(2);
 		patternSegment.clearRules().addRule(bindOff()).knitRow();
 
 		csvRenderer.render(patternSegment);
 		csvRenderer.close();
-		String output = new String(baos.toByteArray());
+		final String output = new String(baos.toByteArray());
 
-		String[] lines = output.split(System.lineSeparator());
-		assertArrayEquals(new String[] {"CO,CO,CO,CO,CO,CO", "K,P,K,P,K,P", "BO,BO,BO,BO,BO,BO"}, lines);
+		final String[] lines = output.split(System.lineSeparator());
+		assertArrayEquals(new String[]{"CO,CO,CO,CO,CO,CO", "K,P,K,P,K,P",
+				"P,K,P,K,P,K", "BO,BO,BO,BO,BO,BO"}, lines);
 		Mockito.verify(baos).close();
 	}
 
 	@Test
 	public void renderPattern() throws Exception {
-		Pattern p = knitShapes();
+		final Pattern p = knitShapes();
 
 		csvRenderer.render(p);
 		csvRenderer.close();

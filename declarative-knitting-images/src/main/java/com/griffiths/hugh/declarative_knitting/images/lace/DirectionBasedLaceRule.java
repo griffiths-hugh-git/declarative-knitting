@@ -18,7 +18,7 @@ public class DirectionBasedLaceRule implements Rule {
 		// TODO: This makes it easier to not worry about edge conditions, but it needs thinking about properly.
 		// Also, how to do triangular rows?
 		if (row.getParentLoops().size()<2*directions.length)
-			throw new IllegalArgumentException("Row length too short");
+			throw new IllegalArgumentException("BasicRow length too short");
 
 		for (int i=0; i<directions.length-1; i++){
 			int firstDirection=directions[i];

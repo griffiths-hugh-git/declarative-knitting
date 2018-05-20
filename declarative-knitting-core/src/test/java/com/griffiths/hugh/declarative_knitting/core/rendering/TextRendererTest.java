@@ -24,10 +24,9 @@ public class TextRendererTest {
 		textRenderer = new TextRenderer(baos);
 	}
 
-
 	@Test
-	public void testSleevePattern() throws Exception{
-		PatternSegment patternSegment = RendererTestsUtil.knitSleeve();
+	public void testSleevePattern() throws Exception {
+		final PatternSegment patternSegment = RendererTestsUtil.knitSleeve();
 
 		textRenderer.render(patternSegment);
 		textRenderer.close();
@@ -37,7 +36,7 @@ public class TextRendererTest {
 	@Test
 	public void render() throws Exception {
 
-		PatternSegment patternSegment = PatternSegment.castOn(6);
+		final PatternSegment patternSegment = PatternSegment.castOn(6);
 
 		patternSegment.addRule(ribStitch(0))
 				.knitRows(2);
@@ -46,16 +45,17 @@ public class TextRendererTest {
 
 		textRenderer.render(patternSegment);
 		textRenderer.close();
-		String output = new String(baos.toByteArray());
+		final String output = new String(baos.toByteArray());
 
-		String[] lines = output.split(System.lineSeparator());
-		assertArrayEquals(new String[] {"CO 6", "* K, P * 3 times", "BO 6"}, lines);
+		final String[] lines = output.split(System.lineSeparator());
+		assertArrayEquals(new String[]{"CO 6", "* K, P * 3 times",
+				"* P, K * 3 times", "BO 6"}, lines);
 		Mockito.verify(baos).close();
 	}
 
 	@Test
 	public void renderPattern() throws Exception {
-		Pattern p = knitShapes();
+		final Pattern p = knitShapes();
 
 		textRenderer.render(p);
 		textRenderer.close();
