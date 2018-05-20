@@ -14,7 +14,7 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.springframework.http.HttpStatus;
 
 public class ImageUtil {
-	private static final File IMAGE_FOLDER = new File(System.getProperty("java.io.tmpdir") + "images");
+	private static final File IMAGE_FOLDER = new File(System.getProperty("java.io.tmpdir"), "images");
 	private static final int MAX_IMAGE_SIZE_BYTES = 1024 * 1024 * 10;
 	private static final String IMAGE_MIME_TYPE = "image";
 
@@ -24,9 +24,9 @@ public class ImageUtil {
 		IMAGE_FOLDER.mkdirs();
 	}
 
-	public static File downloadImageFile(String requestId, String url) throws ImageNotFoundException {
+	public static File downloadImageFile(final String requestId, final String url) throws ImageNotFoundException {
 		// Try to connect
-		try (CloseableHttpResponse httpResponse = HTTP_CLIENT.execute(new HttpGet(url));) {
+		try (final CloseableHttpResponse httpResponse = HTTP_CLIENT.execute(new HttpGet(url))) {
 			// Check response
 			if (httpResponse.getStatusLine().getStatusCode() != HttpStatus.OK.value()) {
 				throw new ImageNotFoundException("Failed to download URL : " + httpResponse.getStatusLine().getReasonPhrase());
@@ -41,27 +41,27 @@ public class ImageUtil {
 			}
 
 			// Construct filename
-			String extension = httpResponse.getEntity().getContentType().getValue().replaceAll(".*/", "");
+			final String extension = httpResponse.getEntity().getContentType().getValue().replaceAll(".*/", "");
 			if (!extension.matches("\\w+")) {
 				throw new ImageNotFoundException("Could not handle this image type : " + extension);
 			}
-			File tempFile = new File(IMAGE_FOLDER, String.format("%s.%s", requestId, extension));
+			final File tempFile = new File(IMAGE_FOLDER, String.format("%s.%s", requestId, extension));
 
 			// Write data to file
-			try (FileOutputStream fos = new FileOutputStream(tempFile)) {
+			try (final FileOutputStream fos = new FileOutputStream(tempFile)) {
 				IOUtils.copy(new URL(url).openStream(), fos);
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				throw new ImageNotFoundException("Failed to copy image", e);
 			}
 
 			// Check the image can be read
-			Mat imread = Imgcodecs.imread(tempFile.getAbsolutePath());
-			if (imread==null || imread.width()==0){
+			final Mat imread = Imgcodecs.imread(tempFile.getAbsolutePath());
+			if (imread == null || imread.width() == 0) {
 				throw new ImageNotFoundException("Unable to read image");
 			}
 
 			return tempFile;
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			throw new ImageNotFoundException("Failed to download image", e);
 		}
 	}

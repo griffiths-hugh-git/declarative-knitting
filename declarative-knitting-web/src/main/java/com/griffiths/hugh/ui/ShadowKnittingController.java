@@ -11,7 +11,6 @@ import java.util.UUID;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
-import org.opencv.imgcodecs.Imgcodecs;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,15 +19,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ShadowKnittingController {
 	public static final int PATTERN_MAX_WIDTH = 500;
-	private Logger log = Logger.getLogger(this.getClass().getSimpleName());
+	private final Logger log = Logger.getLogger(this.getClass().getSimpleName());
 
 	@RequestMapping(value = "rest/shadow", method = RequestMethod.GET)
-	public void generateCellularAutomaton(final HttpServletResponse response, @RequestParam("imageUrl") final String imageUrl,
-										  @RequestParam("width") final int width) throws IOException {
-		String requestId = UUID.randomUUID().toString();
+	public void generate(final HttpServletResponse response, @RequestParam("imageUrl") final String imageUrl,
+						 @RequestParam("width") final int width) throws IOException {
+		final String requestId = UUID.randomUUID().toString();
 		log.info(String.format("Handling request %s from URL '%s'", requestId, imageUrl));
 
-		if (width> PATTERN_MAX_WIDTH){
+		if (width > PATTERN_MAX_WIDTH) {
 			throw new IllegalArgumentException("Requested width is too large, unable to process");
 		}
 
@@ -41,17 +40,14 @@ public class ShadowKnittingController {
 		response.flushBuffer();
 	}
 
-	private void transformImage(String requestId, String imageUrl, int width, OutputStream outputStream) throws IOException {
-		File imageFile = ImageUtil.downloadImageFile(requestId, imageUrl);
+	private void transformImage(final String requestId, final String imageUrl, final int width, final OutputStream outputStream) throws IOException {
+		final File imageFile = ImageUtil.downloadImageFile(requestId, imageUrl);
 		try {
-			String filename = imageFile.getAbsolutePath();
+			final String filename = imageFile.getAbsolutePath();
 
 			// Create pattern and output as spreadsheet
-			try (XlsxRenderer xlsxRenderer = new XlsxRenderer(outputStream)) {
-				FlattenedImage shadowKnittingPattern = ShadowKnittingHelper.createShadowKnittingPattern(filename, xlsxRenderer, width);
-
-				// Save a copy of the flattened image for reference
-				Imgcodecs.imwrite(filename.replaceAll("\\.(\\w+)$", "_flattened.$1"), shadowKnittingPattern.getFlattenedImage());
+			try (final XlsxRenderer xlsxRenderer = new XlsxRenderer(outputStream)) {
+				final FlattenedImage shadowKnittingPattern = ShadowKnittingHelper.createShadowKnittingPattern(filename, xlsxRenderer, width);
 			}
 		} finally {
 			// Make sure the downloaded file is deleted
