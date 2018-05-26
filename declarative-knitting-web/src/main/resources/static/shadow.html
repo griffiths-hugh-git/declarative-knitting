@@ -22,7 +22,7 @@
     </div>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-            <li><a href="https://geekdevving.blogspot.com"> Blog </a></li>
+            <li><a href="https://geekknitting.blogspot.co.uk/"> Blog </a></li>
         </ul>
         <ul class="nav navbar-nav">
             <li><a href="https://github.com/griffiths-hugh-git/declarative-knitting"> Github </a></li>
@@ -40,8 +40,9 @@
     <p><a href="https://en.wikipedia.org/wiki/Illusion_knitting">Shadow (or "illusion") knitting</a> is a technique
         which uses thin stripes and raised ridges to create knitting
         patterns which are hidden when viewed head on, but appear when seen from an angle. <a
-                href="http://www.illusionknitting.woollythoughts.com/information.html">Pat Ashforth and Steve
-            Plummer of Woolly Thoughts</a> are the masters of this technique, and have created some <a>beautiful
+                href="http://www.woollythoughts.com/">Pat Ashforth and Steve
+            Plummer of Woolly Thoughts</a> are the masters of this technique, and have created some <a
+                href="http://www.illusionknitting.woollythoughts.com/information.html">beautiful
             examples</a>.
     </p>
     <p>This tool takes in picture and uses k-means clustering to divide it into two main colours, then generates a
@@ -57,7 +58,8 @@
         <div class="form-group">
             <label for="imageUrlBox">Image URL</label>
             <input type="text" name="imageUrl" class="form-control" id="imageUrlBox" aria-describedby="imageUrlHelp"
-                   placeholder="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
+                   onClick="this.select();"
+                   value="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
             <small id="imageUrlHelp" class="form-text text-muted">Enter the URL of an image to knit. This should be a
                 direct link, and must end with a file extension (e.g. .jpg)
             </small>
@@ -65,7 +67,8 @@
         <div class="form-group">
             <label for="widthBox">Width (stitches)</label>
             <input type="text" name="width" class="form-control" id="widthBox" aria-describedby="widthHelp"
-                   placeholder="200">
+                   onClick="this.select();"
+                   value="200">
             <small id="widthHelp" class="form-text text-muted">Enter the width, in stitches, to make the generated
                 pattern. The generator will calculate the appropriate height. Maximum of 500.
             </small>
