@@ -15,21 +15,21 @@ public class ShadowKnittingHelper {
 
 	public static final double FADE_PROPORTION = 0.7;
 
-	public static FlattenedImage createShadowKnittingPattern(String filename, XlsxRenderer renderer, int widthStitches) throws IOException {
+	public static FlattenedImage createShadowKnittingPattern(final String filename, final XlsxRenderer renderer, final int widthStitches) throws IOException {
 		// Flatten
-		FlattenedImage flattenedImage = new FlattenedImage(filename, widthStitches/2, 0.67);
+		final FlattenedImage flattenedImage = new FlattenedImage(filename, widthStitches / 2, 0.67, 2);
 
 		// Create pattern
-		Pattern pattern = new Pattern();
-		Rule imageRule = ShadowKnittingRule.getInstance(flattenedImage.getPixels());
-		int patternWidth = flattenedImage.getPixels().get(0).length * 2;
-		PatternSegment patternSegment = pattern.createSegment(filename.replaceAll(".*[/\\\\]", ""), patternWidth);
-		int numRows = flattenedImage.getPixels().size() * 4;
+		final Pattern pattern = new Pattern();
+		final Rule imageRule = ShadowKnittingRule.getInstance(flattenedImage.getPixels());
+		final int patternWidth = flattenedImage.getPixels().get(0).length * 2;
+		final PatternSegment patternSegment = pattern.createSegment(filename.replaceAll(".*[/\\\\]", ""), patternWidth);
+		final int numRows = flattenedImage.getPixels().size() * 4;
 		// Set colours
-		pattern.addColour(1, getColour(flattenedImage.getForeground()));
-		pattern.addColour(2, getColour(flattenedImage.getBackground()));
-		pattern.addColour(3, getFadedColour(flattenedImage.getForeground()));
-		pattern.addColour(4, getFadedColour(flattenedImage.getBackground()));
+		pattern.addColour(1, getColour(flattenedImage.getColours().get(0)));
+		pattern.addColour(2, getColour(flattenedImage.getColours().get(1)));
+		pattern.addColour(3, getFadedColour(flattenedImage.getColours().get(0)));
+		pattern.addColour(4, getFadedColour(flattenedImage.getColours().get(1)));
 
 		// Knit
 		// NB - the primary colour is the second stripe, which will be raised on active pixels
@@ -41,15 +41,15 @@ public class ShadowKnittingHelper {
 		// Render
 		renderer.render(pattern);
 
-		// Return the image, so any further inspections can be carrier out
+		// Return the image, so any further inspections can be carried out
 		return flattenedImage;
 	}
 
-	private static Color getColour(double[] bgr) {
+	private static Color getColour(final double[] bgr) {
 		return new Color((int) bgr[2], (int) bgr[1], (int) bgr[0]);
 	}
 
-	private static Color getFadedColour(double[] bgr) {
-		return new Color((int) (bgr[2]* FADE_PROPORTION), (int) (bgr[1]* FADE_PROPORTION), (int) (bgr[0]* FADE_PROPORTION));
+	private static Color getFadedColour(final double[] bgr) {
+		return new Color((int) (bgr[2] * FADE_PROPORTION), (int) (bgr[1] * FADE_PROPORTION), (int) (bgr[0] * FADE_PROPORTION));
 	}
 }

@@ -11,23 +11,31 @@ import com.griffiths.hugh.declarative_knitting.core.rules.modifiers.IncreaseBoth
  * In future these could be split out thematically.
  */
 public class RuleFactory {
-	public static Rule bindOff(){
+	public static Rule bindOff() {
 		return new BindOff();
 	}
-	public static Rule ribStitch(int numRow){
+
+	public static Rule ribStitch(final int numRow) {
 		return new RibStitch(numRow);
 	}
-	public static Rule stockingStitch(int numRow){
+
+	public static Rule stockingStitch(final int numRow) {
 		return new StockingStitch(numRow);
 	}
-	public static Rule increaseBothEnds(int numRow){
+
+	public static Rule stockingStitchITR() {
+		return new StockingStitchITR();
+	}
+
+	public static Rule increaseBothEnds(final int numRow) {
 		return IncreaseBothEnds.getInstance(numRow);
 	}
 
-	public static ColourRule blockColour(int blockColour) {
+	public static ColourRule blockColour(final int blockColour) {
 		return new BlockColour(blockColour);
 	}
-	public static ColourRule stripedColour(int primaryStripeWidth, int secondaryStripeWidth, int primaryColour, int secondaryColour){
+
+	public static ColourRule stripedColour(final int primaryStripeWidth, final int secondaryStripeWidth, final int primaryColour, final int secondaryColour) {
 		return new StripedColour(primaryStripeWidth, secondaryStripeWidth, primaryColour, secondaryColour);
 	}
 }

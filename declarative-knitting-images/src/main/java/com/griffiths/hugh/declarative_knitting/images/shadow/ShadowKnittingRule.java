@@ -9,25 +9,26 @@ import static com.griffiths.hugh.declarative_knitting.core.model.stitches.Techni
 import static com.griffiths.hugh.declarative_knitting.core.model.stitches.TechniqueFactory.purl;
 
 public class ShadowKnittingRule implements Rule {
-	private final List<boolean[]> image;
+	private final List<int[]> image;
 	private int rowNum = 0;
 
-	private ShadowKnittingRule(List<boolean[]> image) {
+	private ShadowKnittingRule(final List<int[]> image) {
 		this.image = image;
 	}
 
-	public static Rule getInstance(List<boolean[]> image) {
+	public static Rule getInstance(final List<int[]> image) {
 		return new ShadowKnittingRule(image);
 	}
 
 	@Override
-	public void apply(Row row) {
-		if (rowNum >= image.size() * 4)
+	public void apply(final Row row) {
+		if (rowNum >= image.size() * 4) {
 			return;
+		}
 
 		// Each "pixel" is 2 stitches wide and 4 deep.
-		boolean[] imageRow = image.get(rowNum / 4);
-		int pixelRow = rowNum % 4;
+		final int[] imageRow = image.get(rowNum / 4);
+		final int pixelRow = rowNum % 4;
 
 		for (int i = 0; i < Math.min(imageRow.length, row.getParentLoops().size()); i++) {
 			// Whether we knit or purl depends on which row we're on, and whether this pixel is active
@@ -39,8 +40,8 @@ public class ShadowKnittingRule implements Rule {
 		rowNum++;
 	}
 
-	private Technique getTechnique(boolean pixelState, int pixelRow) {
-		if (pixelState) {
+	private Technique getTechnique(final int pixelState, final int pixelRow) {
+		if (pixelState != 0) {
 			switch (pixelRow) {
 				/*
 				 * Ridge on the second stripe:
@@ -74,6 +75,6 @@ public class ShadowKnittingRule implements Rule {
 			}
 		}
 
-		throw new IndexOutOfBoundsException("Shadow knitting pixel row out of bounds : "+pixelRow);
+		throw new IndexOutOfBoundsException("Shadow knitting pixel row out of bounds : " + pixelRow);
 	}
 }
