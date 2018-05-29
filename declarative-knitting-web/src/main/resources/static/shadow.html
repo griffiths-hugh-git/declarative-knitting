@@ -22,7 +22,7 @@
     </div>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-            <li><a href="https://geekdevving.blogspot.com"> Blog </a></li>
+            <li><a href="https://geekknitting.blogspot.co.uk/"> Blog </a></li>
         </ul>
         <ul class="nav navbar-nav">
             <li><a href="https://github.com/griffiths-hugh-git/declarative-knitting"> Github </a></li>
@@ -32,46 +32,71 @@
         </ul>
     </div>
 </div>
-<div class="jumbotron">
-    <h1>Shadow Knitting</h1>
-    <p>Produces shadow/illusion knitting patterns from images.</p>
+<div class="container">
+    <div class="jumbotron">
+        <h1>Shadow Knitting</h1>
+        <p>Produces shadow/illusion knitting patterns from images.</p>
+    </div>
+    <div>
+        <p><a href="https://en.wikipedia.org/wiki/Illusion_knitting">Shadow (or "illusion") knitting</a> is a technique
+            which uses thin stripes and raised ridges to create knitting
+            patterns which are hidden when viewed head on, but appear when seen from an angle. <a
+                    href="http://www.woollythoughts.com/">Pat Ashforth and Steve
+                Plummer of Woolly Thoughts</a> are the masters of this technique, and have created some <a
+                    href="http://www.illusionknitting.woollythoughts.com/information.html">beautiful
+                examples</a>.
+        </p>
+        <p>This tool takes in picture and uses k-means clustering to divide it into two main colours, then generates a
+            shadow knitting chart based on this image. This will then be downloaded in your browser as a spreadsheet.
+            This
+            will work best with images with obvious foreground and background colours. In the spreadsheet, purl stitches
+            are
+            shown slightly darker than knit stitches - this is to allow the final pattern to be visible in the
+            sheet.</p>
+        <p>Generating may take a few seconds, please be patient - this is because the generated spreadsheet can be
+            large. Also, please be patient with the error handling - there's quite a few things which can go wrong while
+            trying to get hold of the requested image, the system will make its best attempt to get the image you
+            request, if it fails please try a different image.
+        <div class="row">
+            <div class="col-md-8">
+                <form action="/rest/shadow" method="get" action="_blank">
+                    <div class="form-group">
+                        <label for="imageUrlBox">Image URL</label>
+                        <input type="text" name="imageUrl" class="form-control" id="imageUrlBox"
+                               aria-describedby="imageUrlHelp"
+                               onClick="this.select();"
+                               onBlur="$('#img-preview-box').attr('src',$('#imageUrlBox').val());"
+                               value="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
+                        <small id="imageUrlHelp" class="form-text text-muted">Enter the URL of an image to knit. This
+                            should be a
+                            direct link, and must end with a file extension (e.g. .jpg)
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="widthBox">Width (stitches)</label>
+                        <input type="text" name="width" class="form-control" id="widthBox" aria-describedby="widthHelp"
+                               onClick="this.select();"
+                               value="200">
+                        <small id="widthHelp" class="form-text text-muted">Enter the width, in stitches, to make the
+                            generated
+                            pattern. The generator will calculate the appropriate height. Maximum of 500.
+                        </small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <img id="img-preview-box" style="max-width:100%"
+                             src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
+                    </div>
+                </div>
+                <div class="panel-footer">Image preview</div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <p><a href="https://en.wikipedia.org/wiki/Illusion_knitting">Shadow (or "illusion") knitting</a> is a technique
-        which uses thin stripes and raised ridges to create knitting
-        patterns which are hidden when viewed head on, but appear when seen from an angle. <a
-                href="http://www.illusionknitting.woollythoughts.com/information.html">Pat Ashforth and Steve
-            Plummer of Woolly Thoughts</a> are the masters of this technique, and have created some <a>beautiful
-            examples</a>.
-    </p>
-    <p>This tool takes in picture and uses k-means clustering to divide it into two main colours, then generates a
-        shadow knitting chart based on this image. This will then be downloaded in your browser as a spreadsheet. This
-        will work best with images with obvious foreground and background colours. In the spreadsheet, purl stitches are
-        shown slightly darker than knit stitches - this is to allow the final pattern to be visible in the
-        sheet.</p>
-    <p>Generating may take a few seconds, please be patient - this is because the generated spreadsheet can be
-        large. Also, please be patient with the error handling - there's quite a few things which can go wrong while
-        trying to get hold of the requested image. The system will make it's best attempt to get the image you request,
-        if it fails please try a different image.
-    <form action="/rest/shadow" method="get" action="_blank">
-        <div class="form-group">
-            <label for="imageUrlBox">Image URL</label>
-            <input type="text" name="imageUrl" class="form-control" id="imageUrlBox" aria-describedby="imageUrlHelp"
-                   placeholder="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
-            <small id="imageUrlHelp" class="form-text text-muted">Enter the URL of an image to knit. This should be a
-                direct link, and must end with a file extension (e.g. .jpg)
-            </small>
-        </div>
-        <div class="form-group">
-            <label for="widthBox">Width (stitches)</label>
-            <input type="text" name="width" class="form-control" id="widthBox" aria-describedby="widthHelp"
-                   placeholder="200">
-            <small id="widthHelp" class="form-text text-muted">Enter the width, in stitches, to make the generated
-                pattern. The generator will calculate the appropriate height. Maximum of 500.
-            </small>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
 </div>
 <script type="text/javascript"
         src="/webjars/bootstrap/3.0.3/js/bootstrap.min.js"></script>
