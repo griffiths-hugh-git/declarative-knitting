@@ -2,7 +2,7 @@ package com.griffiths.hugh.ui;
 
 import com.griffiths.hugh.declarative_knitting.core.rendering.XlsxRenderer;
 import com.griffiths.hugh.declarative_knitting.images.polygons.PolygonalImagesHelper;
-import com.griffiths.hugh.declarative_knitting.images.shadow.flattened.FlattenedImage;
+import com.griffiths.hugh.declarative_knitting.images.shadow.FlattenedImage;
 import com.griffiths.hugh.ui.util.ImageUtil;
 import java.io.File;
 import java.io.IOException;
@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class PolygonalKnittingController {
-	public static final int PATTERN_MAX_WIDTH = 500;
+	private static final int PATTERN_MAX_ROWS = 300;
+	private static final int PATTERN_MAX_SIDES = 12;
+	private static final int PATTERN_MIN_SIDES = 3;
+	private static final int PATTERN_MAX_COLOURS = 10;
 	private final Logger log = Logger.getLogger(this.getClass().getSimpleName());
-
 	private final PolygonalImagesHelper polygonalImagesHelper = new PolygonalImagesHelper();
 
 	@RequestMapping(value = "rest/polygonal", method = RequestMethod.GET)
@@ -32,10 +34,16 @@ public class PolygonalKnittingController {
 		final String requestId = UUID.randomUUID().toString();
 		log.info(String.format("Handling request %s from URL '%s'", requestId, imageUrl));
 
-		// TODO: Bounds checks
-//		if (width > PATTERN_MAX_WIDTH) {
-//			throw new IllegalArgumentException("Requested width is too large, unable to process");
-//		}
+		// Bounds checks
+		if (numRows > PATTERN_MAX_ROWS) {
+			throw new IllegalArgumentException("Requested width is too large, unable to process");
+		} else if (numSides < PATTERN_MIN_SIDES) {
+			throw new IllegalArgumentException("Requested too few sides, unable to process");
+		} else if (numSides > PATTERN_MAX_SIDES) {
+			throw new IllegalArgumentException("Requested too many sides, unable to process");
+		} else if (numColours > PATTERN_MAX_COLOURS) {
+			throw new IllegalArgumentException("Requested too many colours, unable to process");
+		}
 
 		response.addHeader("Content-Disposition", "attachment; filename=\"polygonal_knitting.xlsx\"");
 		response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");

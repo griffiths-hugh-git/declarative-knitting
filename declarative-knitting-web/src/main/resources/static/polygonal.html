@@ -34,29 +34,25 @@
 </div>
 <div class="container">
     <div class="jumbotron">
-        <h1>Polygonal Image Knitting</h1>
-        <p>Produces knitting patterns for images knit in the round.</p>
+        <h1>Polygonal Images</h1>
+        <p>Knit images into polygons in the round.</p>
     </div>
     <div>
-        <p><a href="https://en.wikipedia.org/wiki/Illusion_knitting">Shadow (or "illusion") knitting</a> is a technique
-            which uses thin stripes and raised ridges to create knitting
-            patterns which are hidden when viewed head on, but appear when seen from an angle. <a
-                    href="http://www.woollythoughts.com/">Pat Ashforth and Steve
-                Plummer of Woolly Thoughts</a> are the masters of this technique, and have created some <a
-                    href="http://www.illusionknitting.woollythoughts.com/information.html">beautiful
-                examples</a>.
+        <p>This tool takes an image and creates a pattern to knit this over a pattern of increases giving a polygon
+            shape - whether it's a square, a triangle, or something more exotic.
+            <a href="https://www.ravelry.com/projects/Jhadur/hexagonal-doilies">Here is</a> a sample I made to test
+            this!
         </p>
-        <p>This tool takes in picture and uses k-means clustering to divide it into two main colours, then generates a
-            shadow knitting chart based on this image. This will then be downloaded in your browser as a spreadsheet.
-            This
-            will work best with images with obvious foreground and background colours. In the spreadsheet, purl stitches
-            are
-            shown slightly darker than knit stitches - this is to allow the final pattern to be visible in the
-            sheet.</p>
-        <p>Generating may take a few seconds, please be patient - this is because the generated spreadsheet can be
-            large. Also, please be patient with the error handling - there's quite a few things which can go wrong while
-            trying to get hold of the requested image, the system will make its best attempt to get the image you
-            request, if it fails please try a different image.
+        <p>It works by segmenting the image into a small number of colours, then creating a pattern of increases to
+            produce the requested polygon. It then maps the locations of each of the stitches onto the image to decide
+            the appropriate colour. The pattern is then converted into a spread sheet and downloaded by your browser.
+        </p>
+        <p>This will work best for images with a small number of colours, so there isn't a lot of carrying floats
+            required. The pattern ends when the outermost row touches the edge of the image, so if you want to knit the
+            whole image, you may need to add some padding around the edges to make sure it is all included.
+        </p>
+        <p>As with the shadow knitting tool, please be patient with the error handling - I've tried to keep this
+            flexible, which makes some errors unavoidable. If your original image fails, please try a different image.
         <div class="row">
             <div class="col-md-8">
                 <form action="/rest/polygonal" method="get" action="_blank">
@@ -66,10 +62,9 @@
                                aria-describedby="imageUrlHelp"
                                onClick="this.select();"
                                onBlur="$('#img-preview-box').attr('src',$('#imageUrlBox').val());"
-                               value="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
+                               value="https://1.bp.blogspot.com/-yA4PKR_17fw/WwvsyumzcTI/AAAAAAAAA8o/o6EU_udlUEAG_rS0EULIFv5t3hdEPc40gCLcBGAs/s1600/original.jpg">
                         <small id="imageUrlHelp" class="form-text text-muted">Enter the URL of an image to knit. This
-                            should be a
-                            direct link, and must end with a file extension (e.g. .jpg)
+                            should be a direct link, and must end with a file extension (e.g. .jpg)
                         </small>
                     </div>
                     <div class="form-group">
@@ -78,7 +73,7 @@
                                onClick="this.select();"
                                value="50">
                         <small id="rowsHelp" class="form-text text-muted">Enter the number of rows to knit. Maximum of
-                            200.
+                            300.
                         </small>
                     </div>
                     <div class="form-group">
@@ -87,15 +82,14 @@
                                aria-describedby="sidesHelp" onClick="this.select();"
                                value="5">
                         <small id="sidesHelp" class="form-text text-muted">Enter the number of sides the polygon should
-                            have.
-                            Maximum of 12.
+                            have. Between 3 and 12.
                         </small>
                     </div>
                     <div class="form-group">
                         <label for="coloursBox">Number of colours</label>
                         <input type="text" name="numColours" class="form-control" id="coloursBox"
                                aria-describedby="coloursHelp" onClick="this.select();"
-                               value="2">
+                               value="4">
                         <small id="widthHelp" class="form-text text-muted">Enter the number of colours to use. Maximum
                             of 10.
                         </small>
@@ -107,7 +101,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <img id="img-preview-box" style="max-width:100%"
-                             src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
+                             src="https://1.bp.blogspot.com/-yA4PKR_17fw/WwvsyumzcTI/AAAAAAAAA8o/o6EU_udlUEAG_rS0EULIFv5t3hdEPc40gCLcBGAs/s1600/original.jpg">
                     </div>
                 </div>
                 <div class="panel-footer">Image preview</div>
