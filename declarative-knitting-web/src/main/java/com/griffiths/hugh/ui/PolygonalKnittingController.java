@@ -2,7 +2,7 @@ package com.griffiths.hugh.ui;
 
 import com.griffiths.hugh.declarative_knitting.core.rendering.XlsxRenderer;
 import com.griffiths.hugh.declarative_knitting.images.polygons.PolygonalImagesHelper;
-import com.griffiths.hugh.declarative_knitting.images.shadow.FlattenedImage;
+import com.griffiths.hugh.declarative_knitting.images.shadow.flattened.FlattenedImage;
 import com.griffiths.hugh.ui.util.ImageUtil;
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +21,7 @@ public class PolygonalKnittingController {
 	public static final int PATTERN_MAX_WIDTH = 500;
 	private final Logger log = Logger.getLogger(this.getClass().getSimpleName());
 
-	private PolygonalImagesHelper polygonalImagesHelper = new PolygonalImagesHelper();
+	private final PolygonalImagesHelper polygonalImagesHelper = new PolygonalImagesHelper();
 
 	@RequestMapping(value = "rest/polygonal", method = RequestMethod.GET)
 	public void generate(final HttpServletResponse response, @RequestParam("imageUrl") final String imageUrl,
@@ -46,7 +46,7 @@ public class PolygonalKnittingController {
 		response.flushBuffer();
 	}
 
-	private void transformImage(final String requestId, final String imageUrl, final int numSides, final int numRows, final int numColours,
+	private void transformImage(final String requestId, final String imageUrl, final int numRows, final int numSides, final int numColours,
 								final OutputStream outputStream) throws IOException {
 		final File imageFile = ImageUtil.downloadImageFile(requestId, imageUrl);
 		try {
